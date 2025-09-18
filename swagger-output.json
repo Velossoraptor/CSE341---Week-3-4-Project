@@ -5,36 +5,27 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "localhost:3300",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Base Page, no params",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "Api Documentation; This page",
         "responses": {
           "default": {
             "description": ""
@@ -44,25 +35,52 @@
     },
     "/spells/": {
       "get": {
-        "description": "",
+        "description": "Gets all spells, no params",
+        "produces": ["application/json"],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "post": {
-        "description": "",
+        "description": "Creates a new spell, requires body to detail spell. \nindex: Name of spell with no caps, no numbers, dashes instead of space\nname: Name of spell with formatting\nlevel: Integer value for spell level\nurl: URL to read more abou the spell",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": { "type": "string", "example": "acid-splash-two" },
+                "name": { "type": "string", "example": "Acid Splash Two" },
+                "level": { "type": "integer", "example": "2" },
+                "url": { "type": "string", "example": "url/path/otherpath/api" }
+              }
+            }
+          }
+        ]
       }
     },
     "/spells/{id}": {
       "get": {
-        "description": "",
+        "description": "Gets a spell by id or index name",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -72,58 +90,58 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
-        "description": "",
+        "description": "Updates a spell by id or index name",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
+          },
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": { "type": "string", "example": "any" },
+                "name": { "type": "string", "example": "any" },
+                "level": { "type": "integer", "example": "0" },
+                "url": { "type": "string", "example": "any" }
+              }
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
