@@ -1,0 +1,239 @@
+[
+            {
+            "index": "barbarian",
+            "name": "Barbarian",
+            "description":"A Fierce Warrior of Primal Rage",
+            "subclasses":[
+                {"name":"Path of the Berserker"},
+                {"name":"Path of the Wild Heart"},
+                {"name":"Path of the World Tree"},
+                {"name":"Path of the Zealot"},
+                {"name":"Path of the Experiment"},
+                {"name":"Path of the Fractured"},
+                {"name":"Path of the Muscle Wizard"},
+                {"name":"Path of the Primal Spirit"},
+                {"name":"Path of the Spell Scorned"},
+                {"name":"Path of the Wrathful Dead"}
+            ],
+            "apiUrl": "/api/2014/classes/barbarian",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190875-barbarian"
+            },
+            {
+            "index": "bard",
+            "name": "Bard",
+            "description":"An Inspiring Performer of Music, Dance, and Magic",
+            "subclasses":[
+                {"name":"College of Dance"},
+                {"name":"College of Glamour"},
+                {"name":"College of Lore"},
+                {"name":"College of Valor"},
+                {"name":"College of Adventure"},
+                {"name":"College of Drama"},
+                {"name":"College of Fools"},
+                {"name":"College of Requiems"},
+                {"name":"College of Whistles"}
+            ],
+            "apiUrl": "/api/2014/classes/bard",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190876-bard"
+            },
+            {
+            "index": "cleric",
+            "name": "Cleric",
+            "description":"A Miraculous Priest of Divine Power",
+            "subclasses":[
+                {"name":"Life Domain"},
+                {"name":"Light Domain"},
+                {"name":"Trickery Domain"},
+                {"name":"War Domain"},
+                {"name":"Apocalypse Domain"},
+                {"name":"Eldritch Domain"},
+                {"name":"Harvest Domain"},
+                {"name":"Inquisition Domain"},
+                {"name":"Purification Domain"}
+            ],
+            "apiUrl": "/api/2014/classes/cleric",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190877-cleric"
+            },
+            {
+            "index": "druid",
+            "name": "Druid",
+            "description":"A Nature Priest of Primal Power",
+            "subclasses":[
+                {"name":"Circle of the Land"},
+                {"name":"Circle of the Moon"},
+                {"name":"Circle of the Sea"},
+                {"name":"Circle of the Stars"},
+                {"name":"Circle of Blood"},
+                {"name":"Circle of Entropy"},
+                {"name":"Circle of Mutation"},
+                {"name":"Circle of the Old Ways"},
+                {"name":"Circle of Symbiote"},
+                {"name":"Circle of Wicker"}
+            ],
+            "apiUrl": "/api/2014/classes/druid",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190878-druid"
+            },
+            {
+            "index": "fighter",
+            "name": "Fighter",
+            "description":"A Master of All Arms and Armor",
+            "subclasses":[
+                {"name":"Battle Master"},
+                {"name":"Champion"},
+                {"name":"Eldritch Knight"},
+                {"name":"Psi Warrior"},
+                {"name":"Barrow Guard"},
+                {"name":"Bulwark Warrior"},
+                {"name":"Dungeoneer"},
+                {"name":"Hero"},
+                {"name":"Living Crucible"},
+                {"name":"Nightwatcher"}
+            ],
+            "apiUrl": "/api/2014/classes/fighter",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190879-fighter"
+            },
+            {
+            "index": "monk",
+            "name": "Monk",
+            "description":"A Martial Artist of Supernatural Focus",
+            "subclasses":[
+                {"name":"Warrior of Mercy"},
+                {"name":"Warrior of Shadow"},
+                {"name":"Warrior of the Elements"},
+                {"name":"Warrior of the Open Hand"},
+                {"name":"Warrior of the Cosmic Balance"},
+                {"name":"Warrior of Pride"},
+                {"name":"Warrior of Regret"},
+                {"name":"Warrior of the Leaden Crown"},
+                {"name":"Warrior of Pestilent Haze"},
+                {"name":"Warrior of the Street"}
+            ],
+            "apiUrl": "/api/2014/classes/monk",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190880-monk"
+            },
+            {
+            "index": "paladin",
+            "name": "Paladin",
+            "description":"A Devout Warrior of Sacred Oaths",
+            "subclasses":[
+                {"name":"Oath of Devotion"},
+                {"name":"Oath of Glory"},
+                {"name":"Oath of the Ancients"},
+                {"name":"Oath of Vengeance"},
+                {"name":"Oath of Castigation"},
+                {"name":"Oath of Pestilence"},
+                {"name":"Oath of Revelry"},
+                {"name":"Oath of Slaughter"},
+                {"name":"Oath of the Guardian"},
+                {"name":"Oath of Zeal"}
+            ],
+            "apiUrl": "/api/2014/classes/paladin",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190881-paladin"
+            },
+            {
+            "index": "ranger",
+            "name": "Ranger",
+            "description":"A Wandering Warrior Inbued with Primal Magic",
+            "subclasses":[
+                {"name":"Beast Master"},
+                {"name":"Few Wanderer"},
+                {"name":"Gloom Stalker"},
+                {"name":"Hunter"},
+                {"name":"Green Reaper"},
+                {"name":"Grim Harbinger"},
+                {"name":"Primordeal Archer"},
+                {"name":"Trail Warden"},
+                {"name":"Vermin Lord"}
+            ],
+            "apiUrl": "/api/2014/classes/ranger",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190882-ranger"
+            },
+            {
+            "index": "rogue",
+            "name": "Rogue",
+            "description":"A Dexterous Expert in Stealth and Subterfuge",
+            "subclasses":[
+                {"name":"Arcane Trixter"},
+                {"name":"Assassin"},
+                {"name":"Soul Knife"},
+                {"name":"Theif"},
+                {"name":"Arachnoid Stalker"},
+                {"name":"Highway Rider"},
+                {"name":"Misfortune Bringer"},
+                {"name":"Sanguine Theif"},
+                {"name":"Shadow Stalker"},
+                {"name":"Sinner"}
+            ],
+            "apiUrl": "/api/2014/classes/rogue",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190883-rogue"
+            },
+            {
+            "index": "sorcerer",
+            "name": "Sorcerer",
+            "description":"A Dazzling Mage Filled With Innate Magic",
+            "subclasses":[
+                {"name":"Aberrant Sorcery"},
+                {"name":"Clockwork Sorcery"},
+                {"name":"Draconic Sorcery"},
+                {"name":"Wildmagic Sorcery"},
+                {"name":"Apocalypse Sorcery"},
+                {"name":"Crimson Sorcery"},
+                {"name":"Haunted Sorcery"},
+                {"name":"Hungering Dark"},
+                {"name":"Wretched Bloodline"}
+            ],
+            "apiUrl": "/api/2014/classes/sorcerer",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190884-sorcerer"
+            },
+            {
+            "index": "warlock",
+            "name": "Warlock",
+            "description":"An Occultist Empowered By Otherworldly Pacts",
+            "subclasses":[
+                {"name":"Archfey Patron"},
+                {"name":"Celestial Patron"},
+                {"name":"Fiend Patron"},
+                {"name":"Great Old One Patron"},
+                {"name":"Exalted Assembly of the Feline Patron"},
+                {"name":"Future You Patron"},
+                {"name":"Great Fool Patron"},
+                {"name":"Horned King Patron"},
+                {"name":"Parasite Patron"},
+                {"name":"The Coven"},
+                {"name":"The First Vampire Patron"}
+            ],
+            "apiUrl": "/api/2014/classes/warlock",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190885-warlock"
+            },
+            {
+            "index": "wizard",
+            "name": "Wizard",
+            "description":"A Scholarly Magic-User of Arcane Power",
+            "subclasses":[
+                {"name":"Abjurer"},
+                {"name":"Diviner"},
+                {"name":"Evoker"},
+                {"name":"Illusionist"},
+                {"name":"Bibliomancy"},
+                {"name":"Daemonologist"},
+                {"name":"Occultist"},
+                {"name":"Philosopher"},
+                {"name":"Plague Doctor"},
+                {"name":"Sangromancer"}
+            ],
+            "apiUrl": "/api/2014/classes/wizard",
+            "sourceBook":"SRD",
+            "url":"https://www.dndbeyond.com/classes/2190886-wizard"
+            }
+    ]
