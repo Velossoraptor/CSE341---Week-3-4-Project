@@ -215,7 +215,7 @@
                 "index": { "type": "string", "example": "barbarian-two" },
                 "name": { "type": "string", "example": "Barbarian Two" },
                 "description": { "type": "string", "example": "bro is raging mad" },
-                "subclasses": { "type": "array", "example": ["sub1name","sub2name"] },
+                "subclasses": { "type": "array", "example": [{"name":"sub1name"},{"name":"sub2name"}] },
                 "apiUrl": { "type": "string", "example": "api/classes/barbarian-two" },
                 "sourceBook": { "type": "string", "example": "Homebrew" },
                 "url": { "type": "string", "example": "dndbeyond.com" }
@@ -283,7 +283,7 @@
                 "index": { "type": "string", "example": "barbarian-two" },
                 "name": { "type": "string", "example": "Barbarian Two" },
                 "description": { "type": "string", "example": "bro is raging mad" },
-                "subclasses": { "type": "array", "example": ["sub1name","sub2name"] },
+                "subclasses": { "type": "array", "example": [{"name":"sub1name"},{"name":"sub2name"}] },
                 "apiUrl": { "type": "string", "example": "api/classes/barbarian-two" },
                 "sourceBook": { "type": "string", "example": "Homebrew" },
                 "url": { "type": "string", "example": "dndbeyond.com" }
