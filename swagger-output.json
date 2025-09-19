@@ -5,14 +5,18 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "dungeonsanddragonssimple.onrender.com",
+  "host": "localhost:3300",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/": {
       "get": {
-        "description": "Base Page, no params",
-        "produces": ["application/json"],
+        "description": "Hello World Message and Landing page",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -25,7 +29,7 @@
     },
     "/api-docs": {
       "get": {
-        "description": "Api Documentation; This page",
+        "description": "This page, displays functional documentation and tests",
         "responses": {
           "default": {
             "description": ""
@@ -35,8 +39,10 @@
     },
     "/spells/": {
       "get": {
-        "description": "Gets all spells, no params",
-        "produces": ["application/json"],
+        "description": "Displays all spells",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -47,19 +53,8 @@
         }
       },
       "post": {
-        "description": "Creates a new spell, requires body to detail spell. \nindex: Name of spell with no caps, no numbers, dashes instead of space\nname: Name of spell with formatting\nlevel: Integer value for spell level\nurl: URL to read more abou the spell",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "parameters": [
+        "description": "Creates a new spell",
+        "parameters":[
           {
             "in": "body",
             "name": "body",
@@ -74,13 +69,26 @@
               }
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/spells/{id}": {
       "get": {
-        "description": "Gets a spell by id or index name",
-        "produces": ["application/json"],
+        "description": "Searches for a spell based on Mongo Id or index name",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -105,7 +113,7 @@
         }
       },
       "put": {
-        "description": "Updates a spell by id or index name",
+        "description": "Updates a spell based on Mongo Id or index name",
         "parameters": [
           {
             "name": "id",
@@ -119,10 +127,18 @@
             "schema": {
               "type": "object",
               "properties": {
-                "index": { "type": "string", "example": "any" },
-                "name": { "type": "string", "example": "any" },
-                "level": { "type": "integer", "example": "0" },
-                "url": { "type": "string", "example": "any" }
+                "index": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "url": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -142,6 +158,111 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a spell based on Mongo Id or index name",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Spell": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "required": {
+          "type": "array",
+          "example": [
+            "index",
+            "name",
+            "level",
+            "url"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "acid-arrow-two"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Acid Arrow Two"
+                }
+              }
+            },
+            "level": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "integer"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "url": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "api/spells/acid-arrow-two"
+                }
+              }
+            }
           }
         }
       }

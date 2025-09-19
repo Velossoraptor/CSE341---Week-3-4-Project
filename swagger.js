@@ -5,7 +5,19 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: process.env.HOST || 'localhost:3300'
+  host: process.env.HOST || 'localhost:3300',
+  definitions: {
+    Spell: {
+      type: 'object',       // <-- specify it’s an object
+      required: ['index', 'name', 'level', 'url'], // <-- required fields
+      properties: {         // <-- describe each property’s type
+        index: { type: 'string', example: 'acid-arrow-two' },
+        name: { type: 'string', example: 'Acid Arrow Two' },
+        level: { type: 'integer', example: 2 },
+        url: { type: 'string', example: "api/spells/acid-arrow-two" }
+      }
+    }
+  }
 };
 
 const outputFile = './swagger-output.json';

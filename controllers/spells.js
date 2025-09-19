@@ -56,7 +56,7 @@ const getAll = (req, res) => {
 
 const createNewSpell = async (req, res) => {
   // Async function to create a new spell
-  console.log("Create New Spell");
+  console.log("Create New Spell"); // DEBUGGING
   try {
     const collection = await mongodb.getDb().db('dnd').collection('spells');
     const result = await collection.insertOne(req.body, (error, result) => {
@@ -78,7 +78,7 @@ const createNewSpell = async (req, res) => {
 
 const updateSpell = async (req, res) => {
   // Async function to update a spell by ID
-  console.log("Update Spell");
+  console.log("Update Spell"); // DEBUGGING
   try {
     if(!ObjectId.isValid(req.params.id) && !idRegex.test(req.params.id)){
       return res.status(400).json('Must use a valid spell id/index to find a spell');
@@ -96,7 +96,6 @@ const updateSpell = async (req, res) => {
       query,
       {
         $set: {
-          //Need to modify this for the spells
           index: req.body.index,
           name: req.body.name,
           level: req.body.level,
@@ -124,37 +123,48 @@ const updateSpell = async (req, res) => {
   }
 };
 
-// const deleteSpell = async (req, res) => {
-//   // Async function to delete a spell by ID
-//   try {
-//     const spellIdToDelete = new ObjectId(req.params.id);
-//     const collection = await mongodb.getDb().db('dnd').collection('spells');
-//     const result = await collection.deleteOne({ _id: spellIdToDelete });
+const deleteSpell = async (req, res) => {
+  // Async function to delete a spell by ID
+  try {
+    if(!ObjectId.isValid(req.params.id) && !idRegex.test(req.params.id)){
+      return res.status(400).json('Must use a valid spell id/index to find a spell');
+    }
 
-//     if (result.deletedCount === 0) {
-//       // If no documents were deleted, return a 404 status
-//       return res
-//         .status(404)
-//         .send('Error 404: No spell found with id: ' + req.params.id);
-//     }
-//     res.status(200).send('Deleted Id:' + req.params.id); // Success status and return the ID of the deleted spell
-//     console.log('Deleted spell ' + spellIdToDelete);
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .send(
-//         'Error 500: Encountered an Error while Deleting ID: ' +
-//           req.params.id +
-//           '\n Error:' +
-//           err
-//       ); // If there is some other error, return a 500 status and the error message
-//   }
-// };
+    let query;
+    if(ObjectId.isValid(req.params.id)){
+      query = {_id: new ObjectId(req.params.id)}
+    }else if(idRegex.test(req.params.id)){
+      query = {index: req.params.id};
+    }
+
+    // const spellIdToDelete = new ObjectId(req.params.id);
+    const collection = await mongodb.getDb().db('dnd').collection('spells');
+    const result = await collection.deleteOne(query);
+
+    if (result.deletedCount === 0) {
+      // If no documents were deleted, return a 404 status
+      return res
+        .status(404)
+        .send('Error 404: No spell found with id: ' + req.params.id);
+    }
+    res.status(200).send('Deleted Id:' + req.params.id); // Success status and return the ID of the deleted spell
+    console.log('Deleted spell ' + JSON.stringify(query));
+  } catch (err) {
+    res
+      .status(500)
+      .send(
+        'Error 500: Encountered an Error while Deleting ID: ' +
+          req.params.id +
+          '\n Error:' +
+          err
+      ); // If there is some other error, return a 500 status and the error message
+  }
+};
 
 module.exports = {
   getAll,
   getSingle,
   createNewSpell,
   updateSpell,
-  // deleteSpell,
+  deleteSpell,
 };
