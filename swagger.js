@@ -8,13 +8,26 @@ const doc = {
   host: process.env.HOST || 'localhost:3300',
   definitions: {
     Spell: {
-      type: 'object',       // <-- specify it’s an object
-      required: ['index', 'name', 'level', 'url'], // <-- required fields
-      properties: {         // <-- describe each property’s type
+      type: 'object',
+      required: ['index', 'name', 'level', 'url'],
+      properties: {
         index: { type: 'string', example: 'acid-arrow-two' },
         name: { type: 'string', example: 'Acid Arrow Two' },
         level: { type: 'integer', example: 2 },
         url: { type: 'string', example: "api/spells/acid-arrow-two" }
+      }
+    },
+    Class: {
+      type: 'object',
+      required: ['index', 'name', 'description', 'subclasses', 'apiUrl', 'sourceBook', 'url'],
+      properties: {
+        index: { type: 'string', example: 'barbarian-two' },
+        name: { type: 'string', example: 'Barbarian Two' },
+        description: { type: 'string', example: 'Bro is Raging Mad' },
+        subclass: { type: 'array', example: ["sub1name", "sub2name"] },
+        apiUrl: { type: 'string', example: 'api/classes/barbarian-two' },
+        sourceBook: { type: 'string', example: "Homebrew" },
+        url: { type: 'string', example: "dndbeyond.com" }
       }
     }
   }

@@ -3,30 +3,31 @@ const mongodb = require('../db/connect'); // Import the database connection modu
 const ObjectId = require('mongodb').ObjectId;
 const idRegex = /^[a-z-]+$/;
 
-// Gets all spells
+// Gets all classes
 const getAll = (req, res) => {
-  console.log('Getting All Spells'); // DEBUGGING
+  console.log('Getting All Classes'); // DEBUGGING
   mongodb
     .getDb()
     .db('dnd')
-    .collection('spells')
+    .collection('classes')
     .find()
     .toArray()
-    .then((spells) => {
+    .then((classes) => {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(spells);
+      res.status(200).json(classes);
     })
     .catch((err) => {
       res.status(400).json({ message: err });
     });
 };
 
+// Gets Single Class by Index
 const getSingle = (req, res) => {
-  console.log('Getting Single Spell'); // DEBUGGING
+  console.log('Getting Single Class'); // DEBUGGING
   if (!ObjectId.isValid(req.params.id) && !idRegex.test(req.params.id)) {
     return res
       .status(400)
-      .json('Must use a valid spell id/index to find a spell');
+      .json('Must use a valid spell id/index to find a class');
   }
 
   let query;
@@ -39,53 +40,53 @@ const getSingle = (req, res) => {
   mongodb
     .getDb()
     .db('dnd')
-    .collection('spells')
+    .collection('classes')
     .find(query)
     .toArray()
-    .then((spells) => {
-      if (!spells || spells.length === 0) {
+    .then((classes) => {
+      if (!classes || classes.length === 0) {
         return res
           .status(404)
-          .json({ message: `No spell found for ${JSON.stringify(query)}` });
+          .json({ message: `No class found for ${JSON.stringify(query)}` });
       }
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(spells[0]);
+      res.status(200).json(classes[0]);
     })
     .catch((err) => {
       res.status(500).json({ message: err.message || err });
     });
 };
 
-const createNewSpell = async (req, res) => {
-  // Async function to create a new spell
-  console.log('Create New Spell'); // DEBUGGING
+// Async function to create a new class
+const createNewClass = async (req, res) => {
+  console.log('Create New Class'); // DEBUGGING
   try {
-    const collection = await mongodb.getDb().db('dnd').collection('spells');
+    const collection = await mongodb.getDb().db('dnd').collection('classes');
     const result = await collection.insertOne(req.body, (error, result) => {
       if (error) {
         return res.status(500).send(error);
       }
     });
-    res.status(200).send(result.insertedId); // Return the ID of the newly created spell
-    console.log(result.insertedId); // Log the ID of the newly created spell
+    res.status(200).send(result.insertedId); // Return the ID of the newly created class
+    console.log(result.insertedId); // Log the ID of the newly created class
   } catch (err) {
     res
       .status(500)
       .send(
-        'Error 500: Encountered an Error while Creating New Spell\n Error:' +
+        'Error 500: Encountered an Error while Creating New Class\n Error:' +
           err
       ); // If there is some other error, return a 500 status and the error message
   }
 };
 
-const updateSpell = async (req, res) => {
-  // Async function to update a spell by ID
-  console.log('Update Spell'); // DEBUGGING
+// Async function to update a spell by ID
+const updateClass = async (req, res) => {
+  console.log('Update Class'); // DEBUGGING
   try {
     if (!ObjectId.isValid(req.params.id) && !idRegex.test(req.params.id)) {
       return res
         .status(400)
-        .json('Must use a valid spell id/index to update a spell');
+        .json('Must use a valid class id/index to update a class');
     }
 
     let query;
@@ -95,23 +96,26 @@ const updateSpell = async (req, res) => {
       query = { index: req.params.id };
     }
 
-    const collection = await mongodb.getDb().db('dnd').collection('spells');
+    const collection = await mongodb.getDb().db('dnd').collection('classes');
     const result = await collection.updateOne(query, {
       $set: {
         index: req.body.index,
         name: req.body.name,
-        level: req.body.level,
-        url: req.body.url,
+        description: req.body.description,
+        subclasses: req.body.subclasses,
+        apiUrl: req.body.apiUrl,
+        sourceBook: req.body.sourceBook,
+        url: req.body.url
       },
     });
     if (result.matchedCount === 0) {
       return res
         .status(404)
-        .send('Error 404: No spell found with id: ' + req.params.id);
+        .send('Error 404: No class found with id: ' + req.params.id);
     }
     res.status(200).send('Updated Id:' + req.params.id); // Success status and return the ID of the updated spell
     console.log(req.body);
-    console.log('Updated spell ' + spellIdToModify);
+    console.log('Updated class ' + spellIdToModify);
   } catch (err) {
     res
       .status(500)
@@ -124,13 +128,13 @@ const updateSpell = async (req, res) => {
   }
 };
 
-const deleteSpell = async (req, res) => {
-  // Async function to delete a spell by ID
+// Async function to delete a class by ID
+const deleteClass = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id) && !idRegex.test(req.params.id)) {
       return res
         .status(400)
-        .json('Must use a valid spell id/index to delete a spell');
+        .json('Must use a valid class id/index to delete a spell');
     }
 
     let query;
@@ -140,17 +144,17 @@ const deleteSpell = async (req, res) => {
       query = { index: req.params.id };
     }
 
-    const collection = await mongodb.getDb().db('dnd').collection('spells');
+    const collection = await mongodb.getDb().db('dnd').collection('classes');
     const result = await collection.deleteOne(query);
 
     if (result.deletedCount === 0) {
       // If no documents were deleted, return a 404 status
       return res
         .status(404)
-        .send('Error 404: No spell found with id: ' + req.params.id);
+        .send('Error 404: No class found with id: ' + req.params.id);
     }
-    res.status(200).send('Deleted Id:' + req.params.id); // Success status and return the ID of the deleted spell
-    console.log('Deleted spell ' + JSON.stringify(query));
+    res.status(200).send('Deleted Id:' + req.params.id); // Success status and return the ID of the deleted class
+    console.log('Deleted class ' + JSON.stringify(query));
   } catch (err) {
     res
       .status(500)
@@ -166,7 +170,7 @@ const deleteSpell = async (req, res) => {
 module.exports = {
   getAll,
   getSingle,
-  createNewSpell,
-  updateSpell,
-  deleteSpell,
+  createNewClass,
+  updateClass,
+  deleteClass,
 };

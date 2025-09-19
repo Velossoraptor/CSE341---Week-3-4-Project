@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.use('/spells', require('./spells')); // Routes all /spells requests to spells.js
+router.use('/classes', require('./classes')); // Routes all /spells requests to spells.js
 
 router.use('/api-docs', swaggerUi.serve);
 router.get('/api-docs', swaggerUi.setup(swaggerDocument, options));

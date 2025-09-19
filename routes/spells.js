@@ -21,7 +21,7 @@ const spellsController = require('../controllers/spells'); // Import the contact
  *       500:
  *         description: Server Error
  */
-router.get('/', spellsController.getAll); // Routes all /contacts requests to contacts.js getAll function
+router.get('/', spellsController.getAll); // Routes all /spells requests to spells.js getAll function
 
 
 /**
@@ -42,7 +42,7 @@ router.get('/', spellsController.getAll); // Routes all /contacts requests to co
  *       500:
  *         description: Server Error
  */
-router.get('/:id', spellsController.getSingle); // Routes all /contacts/:id requests to contacts.js getSingle function
+router.get('/:id', spellsController.getSingle); // Routes all /spells/:id requests to spells.js getSingle function
 
 
 /**
@@ -66,7 +66,7 @@ router.get('/:id', spellsController.getSingle); // Routes all /contacts/:id requ
  *       500:
  *         description: Server Error
  */
-router.post('/', validation.saveSpell, spellsController.createNewSpell); // Routes all POST /contacts requests to contacts.js createNew function
+router.post('/', validation.saveSpell, spellsController.createNewSpell); // Routes all POST /spells requests to spells.js createNew function
 
 /**
  * @swagger
@@ -95,7 +95,7 @@ router.post('/', validation.saveSpell, spellsController.createNewSpell); // Rout
  *       500:
  *         description: Server Error
  */
-router.put('/:id', validation.saveSpell, spellsController.updateSpell); // Routes all PUT /contacts/:id-to-modify requests to contacts.js updateContact function
+router.put('/:id', validation.saveSpell, spellsController.updateSpell); // Routes all PUT /spells/:id-to-modify requests to spells.js updateSpell function
 
 /**
  * @swagger
@@ -118,6 +118,6 @@ router.put('/:id', validation.saveSpell, spellsController.updateSpell); // Route
  *       500:
  *         description: Server Error
  */
-router.delete('/:id', spellsController.deleteSpell); // Routes all DELETE /contacts/:id-to-delete requests to contacts.js deleteContact function
+router.delete('/:id', spellsController.deleteSpell); // Routes all DELETE /spells/:id-to-delete requests to spells.js deleteSpell function
 
 module.exports = router;

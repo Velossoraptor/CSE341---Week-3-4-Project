@@ -13,7 +13,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "Hello World Message and Landing page",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -29,7 +29,7 @@
     },
     "/api-docs": {
       "get": {
-        "description": "This page, displays functional documentation and tests",
+        "description": "",
         "responses": {
           "default": {
             "description": ""
@@ -39,7 +39,7 @@
     },
     "/spells/": {
       "get": {
-        "description": "Displays all spells",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -53,7 +53,7 @@
         }
       },
       "post": {
-        "description": "Creates a new spell",
+        "description": "",
         "parameters":[
           {
             "in": "body",
@@ -85,7 +85,7 @@
     },
     "/spells/{id}": {
       "get": {
-        "description": "Searches for a spell based on Mongo Id or index name",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -186,6 +186,154 @@
           }
         }
       }
+    },
+    "/classes/": {
+      "get": {
+        "description": "Get All Classes",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new Class",
+        "parameters":[
+          {
+            "in": "body",
+            "name": "class",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": { "type": "string", "example": "barbarian-two" },
+                "name": { "type": "string", "example": "Barbarian Two" },
+                "description": { "type": "string", "example": "bro is raging mad" },
+                "subclasses": { "type": "array", "example": ["sub1name","sub2name"] },
+                "apiUrl": { "type": "string", "example": "api/classes/barbarian-two" },
+                "sourceBook": { "type": "string", "example": "Homebrew" },
+                "url": { "type": "string", "example": "dndbeyond.com" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/classes/{id}": {
+      "get": {
+        "description": "Get a class by Mongo Id or index name",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a class based on Mongo Id or index name",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": { "type": "string", "example": "barbarian-two" },
+                "name": { "type": "string", "example": "Barbarian Two" },
+                "description": { "type": "string", "example": "bro is raging mad" },
+                "subclasses": { "type": "array", "example": ["sub1name","sub2name"] },
+                "apiUrl": { "type": "string", "example": "api/classes/barbarian-two" },
+                "sourceBook": { "type": "string", "example": "Homebrew" },
+                "url": { "type": "string", "example": "dndbeyond.com" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a class by Mongo Id or index name",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -260,6 +408,132 @@
                 "example": {
                   "type": "string",
                   "example": "api/spells/acid-arrow-two"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Class": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "required": {
+          "type": "array",
+          "example": [
+            "index",
+            "name",
+            "description",
+            "subclasses",
+            "apiUrl",
+            "sourceBook",
+            "url"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "barbarian-two"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Barbarian Two"
+                }
+              }
+            },
+            "description": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Bro is Raging Mad"
+                }
+              }
+            },
+            "subclass": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "example": {
+                  "type": "array",
+                  "example": [
+                    "sub1name",
+                    "sub2name"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "apiUrl": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "api/classes/barbarian-two"
+                }
+              }
+            },
+            "sourceBook": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Homebrew"
+                }
+              }
+            },
+            "url": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "dndbeyond.com"
                 }
               }
             }
