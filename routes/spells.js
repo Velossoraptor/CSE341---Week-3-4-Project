@@ -3,6 +3,8 @@ const bodyParser = require('body-parser'); // Import body-parser to parse JSON r
 const validation = require("../middleware/validate");
 const router = express.Router(); // Create a router instance
 
+const {isAuthenticated} = require("../middleware/authenticate");
+
 
 router.use(bodyParser.json()); // Use body-parser middleware to parse JSON
 
@@ -66,7 +68,7 @@ router.get('/:id', spellsController.getSingle); // Routes all /spells/:id reques
  *       500:
  *         description: Server Error
  */
-router.post('/', validation.saveSpell, spellsController.createNewSpell); // Routes all POST /spells requests to spells.js createNew function
+router.post('/', isAuthenticated, validation.saveSpell, spellsController.createNewSpell); // Routes all POST /spells requests to spells.js createNew function
 
 /**
  * @swagger
@@ -95,7 +97,7 @@ router.post('/', validation.saveSpell, spellsController.createNewSpell); // Rout
  *       500:
  *         description: Server Error
  */
-router.put('/:id', validation.saveSpell, spellsController.updateSpell); // Routes all PUT /spells/:id-to-modify requests to spells.js updateSpell function
+router.put('/:id', isAuthenticated, validation.saveSpell, spellsController.updateSpell); // Routes all PUT /spells/:id-to-modify requests to spells.js updateSpell function
 
 /**
  * @swagger
@@ -118,6 +120,6 @@ router.put('/:id', validation.saveSpell, spellsController.updateSpell); // Route
  *       500:
  *         description: Server Error
  */
-router.delete('/:id', spellsController.deleteSpell); // Routes all DELETE /spells/:id-to-delete requests to spells.js deleteSpell function
+router.delete('/:id', isAuthenticated, spellsController.deleteSpell); // Routes all DELETE /spells/:id-to-delete requests to spells.js deleteSpell function
 
 module.exports = router;

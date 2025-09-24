@@ -3,6 +3,7 @@ const bodyParser = require('body-parser'); // Import body-parser to parse JSON r
 const validation = require("../middleware/validate"); // Import Validation middleware
 const router = express.Router(); // Create a router instance
 
+const {isAuthenticated} = require("../middleware/authenticate");
 
 router.use(bodyParser.json()); // Use body-parser middleware to parse JSON
 
@@ -64,7 +65,7 @@ router.get('/:id', classesController.getSingle); // Routes all /classes/:id requ
  *       500:
  *         description: Server Error
  */
-router.post('/', validation.saveClass, classesController.createNewClass); // Routes all POST /classes requests to classes.js createNew function
+router.post('/', isAuthenticated, validation.saveClass, classesController.createNewClass); // Routes all POST /classes requests to classes.js createNew function
 
 /**
  * @swagger
@@ -93,7 +94,7 @@ router.post('/', validation.saveClass, classesController.createNewClass); // Rou
  *       500:
  *         description: Server Error
  */
-router.put('/:id', validation.saveClass, classesController.updateClass); // Routes all PUT /classes/:id-to-modify requests to classes.js updateClass function
+router.put('/:id', isAuthenticated, validation.saveClass, classesController.updateClass); // Routes all PUT /classes/:id-to-modify requests to classes.js updateClass function
 
 /**
  * @swagger
@@ -116,6 +117,6 @@ router.put('/:id', validation.saveClass, classesController.updateClass); // Rout
  *       500:
  *         description: Server Error
  */
-router.delete('/:id', classesController.deleteClass); // Routes all DELETE /classes/:id-to-delete requests to classes.js deleteClass function
+router.delete('/:id', isAuthenticated, classesController.deleteClass); // Routes all DELETE /classes/:id-to-delete requests to classes.js deleteClass function
 
 module.exports = router;
