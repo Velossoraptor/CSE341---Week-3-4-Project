@@ -4,10 +4,10 @@ const router = express.Router(); // Create a router instance
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger-output.json');
 
-const passport = require("passport");
+const passport = require('passport');
 
 var options = {
-  customCss: '.swagger-ui .topbar { display: none }'
+  customCss: '.swagger-ui .topbar { display: none }',
 };
 
 router.get('/', (req, res) => {
@@ -21,11 +21,13 @@ router.use('/classes', require('./classes')); // Routes all /spells requests to 
 router.use('/api-docs', swaggerUi.serve);
 router.get('/api-docs', swaggerUi.setup(swaggerDocument, options));
 
-router.get("/login", passport.authenticate('github'), (req, res)=>{});
-router.get("/logout", function(req, res, next){
-  req.logout(function(errr){
-    if(err){return next(err);}
-    res.redirect("/");
+router.get('/login', passport.authenticate('github'), (req, res) => {});
+router.get('/logout', function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
   });
 });
 
