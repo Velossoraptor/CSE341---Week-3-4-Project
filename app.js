@@ -3,7 +3,6 @@ const app = express();
 const mongodb = require('./db/connect');
 const passport = require('passport');
 const session = require('express-session');
-const { findOrCreateUser } = require('./controllers/users');
 const GitHubStrategy = require('passport-github2').Strategy;
 
 const PORT = process.env.PORT || 3300;
@@ -23,15 +22,9 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL
 },
-async (AccessToken, refreshToken, profile, done)=>{
-    try{
-        const user = await findOrCreateUser(profile);
-        return done(null, user);
-    } catch(err){
-        return done(err, null);
-    }
+function(AccessToken, refreshToken, profile, done){
     //User.findOrCreate({githubId: profile.id}, function (err, user){
-        // return done(null, profile);
+        return done(null, profile);
     //});
 }));
 
