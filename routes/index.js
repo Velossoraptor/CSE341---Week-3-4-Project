@@ -12,7 +12,15 @@ var options = {
 
 router.get('/', (req, res) => {
   // Default Hello World so that we're friendly :)
-  res.send('Hello World! Visit /api-docs to see documentation.');
+  console.log(req.session.user);
+  if (req.session.user) {
+    res.send(
+      `Hello World! Visit /api-docs to see documentation.\nLogged in as ${req.session.user.username}`
+    );
+    console.log(req.session.user.username);
+  } else {
+    res.send(`Hello World! Visit /api-docs to see documentation.\nLogged Out`);
+  }
 });
 
 router.use('/spells', require('./spells')); // Routes all /spells requests to spells.js

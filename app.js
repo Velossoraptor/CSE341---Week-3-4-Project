@@ -8,7 +8,6 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const PORT = process.env.PORT || 3300;
 
 app
-    .use('/', require("./routes"))
     .use(session({
         secret:"secret",
         resave: false,
@@ -23,6 +22,7 @@ passport.use(new GitHubStrategy({
     callbackURL: process.env.CALLBACK_URL
 },
 function(AccessToken, refreshToken, profile, done){
+    console.log("github profile:"+profile);
     //User.findOrCreate({githubId: profile.id}, function (err, user){
         return done(null, profile);
     //});
@@ -35,13 +35,20 @@ passport.deserializeUser((user, done)=>{
     done(null, user);
 });
 
-app.get("/", (req, res) => {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : `Logged Out`)});
-app.get("/github/callback", passport.authenticate("github", {
-    failureRedirect: '/api-docs', session: false}),
+// app.get("/", (req, res) => {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : `Logged Out`)});
+app.get("/github/callback", (req, res, next) =>{
+    console.log("hitting callback url");
+    next();
+},
+passport.authenticate("github", {
+    failureRedirect: '/api-docs'}),
 (req, res)=>{
     req.session.user = req.user;
+    console.log("after auth user=", req.session.user);
     res.redirect("/");
 });
+
+app.use('/', require("./routes"));
 
 mongodb.initDb((err) =>{
     if(err){
