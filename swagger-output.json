@@ -7,16 +7,12 @@
   },
   "host": "dungeonsanddragonssimple.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Landing Page",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -29,7 +25,7 @@
     },
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "Api Page",
         "responses": {
           "default": {
             "description": ""
@@ -40,9 +36,7 @@
     "/spells/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -53,8 +47,8 @@
         }
       },
       "post": {
-        "description": "",
-        "parameters":[
+        "description": "Create a new spell",
+        "parameters": [
           {
             "in": "body",
             "name": "body",
@@ -85,10 +79,8 @@
     },
     "/spells/{id}": {
       "get": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Get a spell by mongo Id or index name",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -178,6 +170,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -190,9 +185,7 @@
     "/classes/": {
       "get": {
         "description": "Get All Classes",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -204,7 +197,7 @@
       },
       "post": {
         "description": "Create a new Class",
-        "parameters":[
+        "parameters": [
           {
             "in": "body",
             "name": "class",
@@ -214,9 +207,18 @@
               "properties": {
                 "index": { "type": "string", "example": "barbarian-two" },
                 "name": { "type": "string", "example": "Barbarian Two" },
-                "description": { "type": "string", "example": "bro is raging mad" },
-                "subclasses": { "type": "array", "example": [{"name":"sub1name"},{"name":"sub2name"}] },
-                "apiUrl": { "type": "string", "example": "api/classes/barbarian-two" },
+                "description": {
+                  "type": "string",
+                  "example": "bro is raging mad"
+                },
+                "subclasses": {
+                  "type": "array",
+                  "example": [{ "name": "sub1name" }, { "name": "sub2name" }]
+                },
+                "apiUrl": {
+                  "type": "string",
+                  "example": "api/classes/barbarian-two"
+                },
                 "sourceBook": { "type": "string", "example": "Homebrew" },
                 "url": { "type": "string", "example": "dndbeyond.com" }
               }
@@ -239,9 +241,7 @@
     "/classes/{id}": {
       "get": {
         "description": "Get a class by Mongo Id or index name",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -282,9 +282,18 @@
               "properties": {
                 "index": { "type": "string", "example": "barbarian-two" },
                 "name": { "type": "string", "example": "Barbarian Two" },
-                "description": { "type": "string", "example": "bro is raging mad" },
-                "subclasses": { "type": "array", "example": [{"name":"sub1name"},{"name":"sub2name"}] },
-                "apiUrl": { "type": "string", "example": "api/classes/barbarian-two" },
+                "description": {
+                  "type": "string",
+                  "example": "bro is raging mad"
+                },
+                "subclasses": {
+                  "type": "array",
+                  "example": [{ "name": "sub1name" }, { "name": "sub2name" }]
+                },
+                "apiUrl": {
+                  "type": "string",
+                  "example": "api/classes/barbarian-two"
+                },
                 "sourceBook": { "type": "string", "example": "Homebrew" },
                 "url": { "type": "string", "example": "dndbeyond.com" }
               }
@@ -326,6 +335,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -346,12 +358,7 @@
         },
         "required": {
           "type": "array",
-          "example": [
-            "index",
-            "name",
-            "level",
-            "url"
-          ],
+          "example": ["index", "name", "level", "url"],
           "items": {
             "type": "string"
           }
@@ -488,10 +495,7 @@
                 },
                 "example": {
                   "type": "array",
-                  "example": [
-                    "sub1name",
-                    "sub2name"
-                  ],
+                  "example": ["sub1name", "sub2name"],
                   "items": {
                     "type": "string"
                   }
