@@ -3,6 +3,7 @@ const app = express();
 const mongodb = require('./db/connect');
 const passport = require('passport');
 const session = require('express-session');
+const { findOrCreateUser } = require('./controllers/users');
 const GitHubStrategy = require('passport-github2').Strategy;
 
 const PORT = process.env.PORT || 3300;
@@ -36,15 +37,16 @@ passport.deserializeUser((user, done)=>{
 });
 
 // app.get("/", (req, res) => {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : `Logged Out`)});
-app.get("/github/callback", (req, res, next) =>{
+app.get("/github/callback", /*(req, res, next) =>{
     console.log("hitting callback url");
     next();
-},
+},*/
 passport.authenticate("github", {
     failureRedirect: '/api-docs'}),
-(req, res)=>{
+async (req, res)=>{
+    const user = await findOrCreateUser(req.user);
     req.session.user = req.user;
-    console.log("after auth user=", req.session.user);
+    // console.log("after auth user=", req.session.user);
     res.redirect("/");
 });
 
